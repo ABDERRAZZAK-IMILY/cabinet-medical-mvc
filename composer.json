@@ -2,7 +2,8 @@
     "name": "secthearter/php-mvc",
     "autoload": {
         "psr-4": {
-            "Secthearter\\PhpMvc\\": "src/"
+            "Secthearter\\PhpMvc\\": "src/" ,
+            "APP\\" : "app"
         }
     },
     "authors": [
