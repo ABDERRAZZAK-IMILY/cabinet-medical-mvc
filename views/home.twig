@@ -1,0 +1,62 @@
+{# base.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cabinet Médical{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                {% if app.session.get('user') %}
+                    <li><a href="/dashboard">Tableau de bord</a></li>
+                    <li><a href="/logout">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="/login">Connexion</a></li>
+                    <li><a href="/register">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Cabinet Médical. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+{# home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Cabinet Médical{% endblock %}
+
+{% block content %}
+    <h1>Bienvenue sur le portail du Cabinet Médical</h1>
+    <p>Gérez vos rendez-vous en toute simplicité.</p>
+{% endblock %}
+
+{# login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+    <h2>Connexion</h2>
+    <form method="post" action="/login">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button type="submit">Se connecter</button>
+    </form>
+{% endblock %}

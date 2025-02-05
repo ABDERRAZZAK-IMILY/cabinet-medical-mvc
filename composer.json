@@ -1,9 +1,8 @@
 {
-    "name": "secthearter/php-mvc",
+    "name": "youco/cabinet-medical-mvc",
     "autoload": {
         "psr-4": {
-            "Secthearter\\PhpMvc\\": "src/" ,
-            "APP\\" : "app"
+            "Youco\\CabinetMedicalMvc\\": "src/"
         }
     },
     "authors": [
@@ -13,9 +12,6 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv" : "^5.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "11"
+        "twig/twig": "^3.19"
     }
 }
