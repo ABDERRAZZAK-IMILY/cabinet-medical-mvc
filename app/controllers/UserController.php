@@ -1,6 +1,6 @@
 <?php
 
-include_once 'model/user.php';
+include_once 'models/user.php';
 include_once 'config/Database.php';
 
 class UserController {
@@ -25,9 +25,5 @@ public function read($id){
        }    
 
 }
-public function delete($id){
-   
-    
-     $this->user->delete($id);
-}
+
 }

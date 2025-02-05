@@ -60,23 +60,6 @@ class User {
         }
     }
 
-    public function delete($id) {
-        if (!is_numeric($id)) {
-            return false;
-        }
-
-        $sql = "DELETE FROM users WHERE id_user = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        try {
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
-            return false;
-        }
-    }
-
     public function getUserById($id) {
         if (!is_numeric($id)) {
             return false;
