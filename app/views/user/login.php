@@ -38,7 +38,7 @@
 
         <p class="mt-4 text-center text-sm text-gray-600">
             Don't have an account? 
-            <a href="/cabinet-medical-mvc/public/register" class="text-blue-500 hover:text-blue-600">Register here</a>
+            <a href="/cabinet-medical-mvc/public/UserController/register" class="text-blue-500 hover:text-blue-600">Register here</a>
         </p>
     </div>
 </body>

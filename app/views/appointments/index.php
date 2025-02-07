@@ -17,7 +17,7 @@
         </div>
     <?php endif; ?>
 
-    <form action="/appointments/post" method="POST" class="max-w-md bg-white rounded-lg shadow-md p-6">
+    <form action="/cabinet-medical-mvc/public/AppointmentController/book" method="POST" class="max-w-md bg-white rounded-lg shadow-md p-6">
         <input type="hidden" name="patient_id" value="<?= $_SESSION['user_id'] ?? ''; ?>">
 
         <div class="mb-4">

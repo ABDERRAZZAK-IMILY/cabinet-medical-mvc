@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+// namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\Appointment;

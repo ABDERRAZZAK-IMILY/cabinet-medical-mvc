@@ -18,7 +18,7 @@
                        class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
                         Accueil
                     </a>
-                    <a href="/logout" 
+                    <a href="/cabinet-medical-mvc/public/UserController/logout" 
                        class="text-red-500 hover:text-red-700 font-medium transition-colors duration-200">
                         Déconnexion
                     </a>

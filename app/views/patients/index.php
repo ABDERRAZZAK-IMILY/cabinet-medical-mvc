@@ -9,7 +9,7 @@
 
         <ul class="space-y-4">
             <li>
-                <a href="cabinet-medical-mvc/public/appointments" 
+                <a href="/cabinet-medical-mvc/public/AppointmentController" 
                    class="block w-full p-4 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition duration-150">
                     <span class="font-medium">Prendre un rendez-vous</span>
                 </a>
