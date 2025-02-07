@@ -7,9 +7,14 @@ class Doctor extends Model {
     protected $table = 'doctors';
 
     public function getAllDoctors() {
-        $stmt = $this->db->query("SELECT * FROM doctors");
+        $stmt = $this->db->query("
+            SELECT d.id, u.name, d.specialization 
+            FROM doctors d
+            JOIN users u ON d.user_id = u.id
+        ");
         return $stmt->fetchAll();
     }
+    
 
     public function getDoctorById($id) {
         $stmt = $this->db->prepare("SELECT * FROM doctors WHERE id = :id");

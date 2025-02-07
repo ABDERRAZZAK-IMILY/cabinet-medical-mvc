@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+// namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
@@ -22,7 +22,11 @@ class UserController extends Controller {
                 return $this->render('user/register', compact('error'));
             } else {
                 $userModel->createUser($name, $email, $password, $role);
-               echo 'regester succec';
+
+                
+                header("Location: cabinet-medical-mvc/public/login");
+
+
                 exit;
             }
         }
@@ -40,9 +44,9 @@ class UserController extends Controller {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $user['role'];
                 if ($user['role'] === 'doctor') {
-                    return $this->render('doctor/index', ['doctor' => $user]);
+                    return $this->render('doctors/index', ['doctor' => $user]);
                 } else {
-                    return $this->render('patient/index', ['patient' => $user]);
+                    return $this->render('patients/index', ['patient' => $user]);
                 }
             } else {
                 $error = "Invalid credentials!";
@@ -55,7 +59,11 @@ class UserController extends Controller {
 
     public function logout() {
         session_destroy();
-        header("Location: /login");
+        return $this->render('user/login');
         exit;
+    }
+
+    public function index(){
+        return $this->render("user/login");
     }
 }

@@ -1,35 +1,50 @@
 <?php
+class Router
+{
+    private $controller = 'UserController';
+    private $method     = 'index';
+    private $params = [];
 
-namespace Core;
-
-class Router {
-    private $routes = [];
-
-    public function get($uri, $controller) {
-        $this->routes['GET'][$uri] = $controller;
+    private function splitURL()
+    {
+        $URL = $_GET['url'] ?? 'home';
+        $URL = explode("/", trim($URL,"/"));
+        return $URL;
     }
 
-    public function post($uri, $controller) {
-        $this->routes['POST'][$uri] = $controller;
-    }
+    public function __construct()
+    {
+        $URL = $this->splitURL();
 
-    public function dispatch($uri, $method) {
-        $basePath = '/cabinet-medical-mvc/public';
-        $uri = str_replace($basePath, '', parse_url($uri, PHP_URL_PATH));
-        
-        if (isset($this->routes[$method][$uri])) {
-            $handler = $this->routes[$method][$uri];
-    
-            if (is_array($handler)) {
-                [$controller, $method] = $handler;
-                (new $controller)->$method();
-            } else {
-                call_user_func($handler);
-            }
-        } else {
-            http_response_code(404);
-            echo "Page not found ";
+        $filename = "../app/controllers/".ucfirst($URL[0]).".php";
+        if(file_exists($filename))
+        {
+            require $filename;
+            $this->controller = ucfirst($URL[0]);
+            unset($URL[0]);
+        }else{
+
+            $filename = "../app/controllers/_404.php";
+            require $filename;
+            $this->controller = "_404";
         }
+
+        $controller = new $this->controller;
+
+        if(!empty($URL[1]))
+        {
+            if(method_exists($controller, $URL[1]))
+            {
+                $this->method = $URL[1];
+                unset($URL[1]);
+            }
+        }
+
+
+        $this->params = $URL ? array_values($URL) : [];
+
+        call_user_func_array([$controller,$this->method], $URL);
+
     }
-    
+
 }

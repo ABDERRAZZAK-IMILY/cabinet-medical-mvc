@@ -18,14 +18,6 @@
                        class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
                         Accueil
                     </a>
-                    <a href="/patient/appointments" 
-                       class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
-                        Prendre un rendez-vous
-                    </a>
-                    <a href="/patient/history" 
-                       class="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
-                        Historique
-                    </a>
                     <a href="/logout" 
                        class="text-red-500 hover:text-red-700 font-medium transition-colors duration-200">
                         Déconnexion

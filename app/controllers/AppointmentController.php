@@ -3,13 +3,18 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\Appointment;
+use App\Models\Doctor;
 
 class AppointmentController extends Controller {
 
     public function index() {
         $appointmentModel = new Appointment();
+        $doctorModel = new Doctor();
+        
         $appointments = $appointmentModel->getAllAppointments();
-        $this->render('appointments/index', ['appointments' => $appointments]);
+        $doctors = $doctorModel->getAllDoctors();
+        
+        $this->render('appointments/index', ['appointments' => $appointments, 'doctors' => $doctors]);
     }
 
     public function show($id) {
@@ -25,10 +30,25 @@ class AppointmentController extends Controller {
             $date = $_POST['date'] ?? '';
             $time = $_POST['time'] ?? '';
 
-            $appointmentModel = new Appointment();
-            $appointmentModel->bookAppointment($patient_id, $doctor_id, $date, $time);
+            if (empty($patient_id) || empty($doctor_id) || empty($date) || empty($time)) {
+                $_SESSION['error'] = "Tous les champs sont requis.";
+                exit;
+            }
 
-            header("Location: /appointments");
+            $appointmentModel = new Appointment();
+
+            if ($appointmentModel->isAppointmentTaken($doctor_id, $date, $time)) {
+                $_SESSION['error'] = "Ce créneau horaire est déjà réservé.";
+                exit;
+            }
+
+            if ($appointmentModel->bookAppointment($patient_id, $doctor_id, $date, $time)) {
+                $_SESSION['success'] = "Rendez-vous pris avec succès !";
+                exit;
+            } else {
+                $_SESSION['error'] = "Une erreur s'est produite. Veuillez réessayer.";
+                exit;
+            }
         }
     }
 }
